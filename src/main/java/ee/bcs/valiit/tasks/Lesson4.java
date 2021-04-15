@@ -35,7 +35,7 @@ public class Lesson4 {
                             "Please enter your new account number");
                     String accountNr=scanner.nextLine();
                     //Sooviksin lisada siia if statemendi, kui kasutaja võetud siis võtke uus.
-                    createAccount(accountNr, accountBalanceMap);
+                    createAccount(accountNr);
                     break;
                 case 2:
                     System.out.println("Enter account number to check balance: ");
@@ -77,7 +77,7 @@ public class Lesson4 {
     // TODO 1
     // Add command: "createAccount ${accountNr}"
     // this has to store accountNr with 0 balance
-    public static void createAccount(String accountNr, Map<String,Double> accountBalanceMap){
+    public static void createAccount(String accountNr){
         accountBalanceMap.put(accountNr,0.0);
     }
 
