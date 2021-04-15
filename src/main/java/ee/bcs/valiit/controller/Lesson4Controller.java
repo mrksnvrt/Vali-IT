@@ -24,11 +24,15 @@ public class Lesson4Controller {
         accountBalanceMap.put(request.getAccountNumber(), request.getAmount());
     }
 
-    @GetMapping("accountBalance/{accountNumber}")
-    public void accountBalance(@RequestParam ("accountNumber") String accountNumber){
-
-
+    @GetMapping("accounts")
+    public Map<String, Double> getAccounts(){
+        return accountBalanceMap;
     }
+
+
+
+
+
 
 }
 

@@ -19,12 +19,13 @@ public class DtoCarsController {
 
     @GetMapping("cars/{numberMitmesAutoListis}")
     public Cars getCar(@PathVariable("numberMitmesAutoListis")int numberMitmesAutoListis){
-        Cars tagastus = listOfCars.get(numberMitmesAutoListis);
-        return tagastus;
+
+        return listOfCars.get(numberMitmesAutoListis);
     }
 
-    @PostMapping("cars")
+    @PostMapping("cars1")
     public void postCar(@RequestBody Cars autoAndmed){
+
         listOfCars.add(autoAndmed);
     }
 
