@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@RestController
+
 public class DtoEmployee {
 
 
@@ -16,6 +18,7 @@ public class DtoEmployee {
         return employeesList;
     }
 
+    //http://localhost:8080/employees/2
     @GetMapping("employees/{a}")
     public Employee rosterGet(@PathVariable("a")int a){
         Employee tagastus = employeesList.get(a);

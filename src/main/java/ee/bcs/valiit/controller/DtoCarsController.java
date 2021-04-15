@@ -6,38 +6,45 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@RestController
 public class DtoCarsController {
 
     public static List<Cars> listOfCars = new ArrayList<>();
 
-    //http://localhost:8080/cars
-    @GetMapping("cars")
+    //Kuvab terve listi
+    //http://localhost:8080/cars/listfull
+    @GetMapping("cars/listfull")
     public List<Cars> getCar(){
-
         return listOfCars;
     }
-
-    @GetMapping("cars/{numberMitmesAutoListis}")
-    public Cars getCar(@PathVariable("numberMitmesAutoListis")int numberMitmesAutoListis){
-
+    //Kuvab sellenda elemendi listist, mille määrad
+    //http://localhost:8080/cars/list/1
+    @GetMapping("cars/list/{numberMitmesAutoListis}")
+    public Cars getCar(@PathVariable("numberMitmesAutoListis")
+                                   int numberMitmesAutoListis){
         return listOfCars.get(numberMitmesAutoListis);
     }
 
-    @PostMapping("cars1")
+    //Sellelt aadressilt saab lisada listi elemendi
+    //http://localhost:8080/cars/add
+    @PostMapping("cars/add")
     public void postCar(@RequestBody Cars autoAndmed){
-
         listOfCars.add(autoAndmed);
     }
 
-    @PutMapping("cars/{numberMitmesAutoListis}")
-    public void putCar(@RequestBody Cars autoAndmed, @PathVariable ("numberMitmesAutoListis")int numberMitmesAutoListis){
+    //Sellelt aadressilt saab muuta mingit kindlat autot listis
+    //http://localhost:8080/cars/change/1
+    @PutMapping("cars/change/{numberMitmesAutoListis}")
+    public void putCar(@RequestBody Cars autoAndmed,
+                       @PathVariable ("numberMitmesAutoListis") int numberMitmesAutoListis){
         listOfCars.set(numberMitmesAutoListis,autoAndmed);
     }
 
-    @DeleteMapping("cars/{numberMitmesAutoListis}")
+    //Sellelt aadressilt saab kustutada elemendi listist
+    //http://localhost:8080/cars/delete/1
+
+    @DeleteMapping("cars/delete/{numberMitmesAutoListis}")
     public void deleteCar(@PathVariable ("numberMitmesAutoListis")int numberMitmesAutoListis){
         listOfCars.remove(numberMitmesAutoListis);
     }
-
-
 }
