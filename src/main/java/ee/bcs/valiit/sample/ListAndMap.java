@@ -48,7 +48,8 @@ public class ListAndMap {
 
         System.out.println(vanused.values());
         System.out.println(vanused.keySet());
-        System.out.println(vanused.get("Mati"));
+        String inimene = "Mati";
+        System.out.println(vanused.get(inimene));
 
     }
 

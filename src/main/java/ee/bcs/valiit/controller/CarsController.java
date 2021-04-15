@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class DtoCarsController {
+public class CarsController {
 
+    //Kõigepealt loon avaliku listi, kuhu veebist andmeid lisatakse
     public static List<Cars> listOfCars = new ArrayList<>();
 
     //Kuvab terve listi
@@ -42,7 +43,6 @@ public class DtoCarsController {
 
     //Sellelt aadressilt saab kustutada elemendi listist
     //http://localhost:8080/cars/delete/1
-
     @DeleteMapping("cars/delete/{numberMitmesAutoListis}")
     public void deleteCar(@PathVariable ("numberMitmesAutoListis")int numberMitmesAutoListis){
         listOfCars.remove(numberMitmesAutoListis);

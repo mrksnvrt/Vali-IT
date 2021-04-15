@@ -8,35 +8,37 @@ import java.util.List;
 
 @RestController
 
-public class DtoEmployee {
-
+public class EmployeesController {
 
     public static List<Employee> employeesList = new ArrayList<>();
-    //http://localhost:8080/employees
-    @GetMapping("employees")
+    //http://localhost:8080/employees/listfull
+    @GetMapping("employees/listfull")
     public List<Employee> rosterGet(){
         return employeesList;
     }
 
-    //http://localhost:8080/employees/2
-    @GetMapping("employees/{a}")
+    //http://localhost:8080/employees/list/2
+    @GetMapping("employees/list/{a}")
     public Employee rosterGet(@PathVariable("a")int a){
-        Employee tagastus = employeesList.get(a);
-        return tagastus;
-
+        return employeesList.get(a);
     }
-    @PostMapping("employees")
+
+    //http://localhost:8080/employees/add
+    @PostMapping("employees/add")
     public void rosterPost(@RequestBody Employee employeeData){
         employeesList.add(employeeData);
     }
-    @PutMapping("employees/{a}")
-    public void rosterPut(@RequestBody Employee employeeData, @PathVariable ("a")int a){
+
+    //http://localhost:8080/employees/put/1
+    @PutMapping("employees/put/{a}")
+    public void rosterPut(@RequestBody Employee employeeData,
+                          @PathVariable ("a")int a){
         employeesList.set(a,employeeData);
     }
 
-    @DeleteMapping("employees/{a}")
+    //http://localhost:8080/employees/delete/1
+    @DeleteMapping("employees/delete/{a}")
     public void rosterDelete(@PathVariable ("a")int a){
         employeesList.remove(a);
     }
-
 }

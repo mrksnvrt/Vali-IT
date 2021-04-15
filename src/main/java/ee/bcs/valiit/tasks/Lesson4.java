@@ -85,9 +85,7 @@ public class Lesson4 {
     // Add command: "getBalance ${accountNr}"
     // this has to display account balance of specific acount
     public static void getBalance(String accountNr, Map<String,Double> accountBalanceMap){
-        if(accountBalanceMap.get(accountNr) > 1000){
-            System.out.println("ayyyy bruda");
-        }
+
         System.out.println("Your balance is "+accountBalanceMap.get(accountNr));
     }
     // TODO 3
