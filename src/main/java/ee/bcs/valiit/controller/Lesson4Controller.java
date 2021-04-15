@@ -15,7 +15,7 @@ public class Lesson4Controller {
 
 
     @GetMapping("createAccount")
-    public void createAccount(@RequestParam("accountNumber") String accountNumber, @RequestParam("amount") Double amount) {
+    public void createAccount(@RequestParam("accountNumber") String accountNumber, @RequestParam("amount") Double amount){
         accountBalanceMap.put(accountNumber,amount);
     }
 
@@ -24,7 +24,11 @@ public class Lesson4Controller {
         accountBalanceMap.put(request.getAccountNumber(), request.getAmount());
     }
 
+    @GetMapping("accountBalance/{accountNumber}")
+    public void accountBalance(@RequestParam ("accountNumber") String accountNumber){
 
+
+    }
 
 }
 
