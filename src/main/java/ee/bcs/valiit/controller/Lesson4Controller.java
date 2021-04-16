@@ -2,6 +2,7 @@ package ee.bcs.valiit.controller;
 
 
 import ee.bcs.valiit.dto.CreateAccountRequest;
+import ee.bcs.valiit.dto.SampleAccount;
 import ee.bcs.valiit.tasks.Lesson4;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +13,8 @@ import java.util.Map;
 public class Lesson4Controller {
 
     private static Map<String, Double> accountBalanceMap = new HashMap<>();
+    private static Map<String, SampleAccount> accountBalanceMap2 = new HashMap<>();
 
-
-    //@GetMapping("createAccount2")
-    //public void createAccount2(@RequestParam("accountNumber") String accountNumber, @RequestParam("amount") Double amount){
-    //    accountBalanceMap.put(accountNumber,amount);}
-
-    //http://localhost:8080/bank/createAccount
     @PostMapping ("bank/createAccount")
     public void createAccount(@RequestBody CreateAccountRequest accountDetails){
         accountBalanceMap.put(accountDetails.getAccountNumber(), accountDetails.getAmount());
@@ -60,6 +56,29 @@ public class Lesson4Controller {
         accountBalanceMap.put(from,accountBalanceMap.get(from) - amount);
         accountBalanceMap.put(to,accountBalanceMap.get(to) + amount);
     }
+
+    //************************************************************************************
+    //Pank 2.0
+
+    @GetMapping ("newbank/createAccount/{accountNumber}/{balance}/{ownerName}")
+    public void createNewBankAccount (@PathVariable("accountNumber") String accountNumber,
+                                      @PathVariable ("balance") Double balance,
+                                      @PathVariable("ownerName")String ownerName){
+        SampleAccount account = new SampleAccount();
+        account.setAccountNumber(accountNumber);
+        account.setBalance(balance);
+        account.setOwnerName(ownerName);
+        account.setLocked(false);
+        accountBalanceMap2.put(accountNumber, account);
+    }
+
+    @GetMapping("newbank/list")
+    public Map<String, SampleAccount> showList(){
+        return accountBalanceMap2;
+    }
+
+
+
 
 
 }
