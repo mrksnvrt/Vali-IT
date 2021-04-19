@@ -4,6 +4,7 @@ package ee.bcs.valiit.controller;
 import ee.bcs.valiit.dto.CreateAccountRequest;
 import ee.bcs.valiit.dto.SampleAccount;
 import ee.bcs.valiit.tasks.Lesson4;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -11,6 +12,11 @@ import java.util.Map;
 
 @RestController
 public class Lesson4Controller {
+
+    @Autowired
+    private NamedParameterJdbcTemplate jt;
+
+    private Map<String, AccountDTO> account = new HashMap<>();
 
     private static Map<String, Double> accountBalanceMap = new HashMap<>();
     private static Map<String, SampleAccount> accountBalanceMap2 = new HashMap<>();
