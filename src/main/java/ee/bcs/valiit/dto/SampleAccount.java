@@ -2,17 +2,26 @@ package ee.bcs.valiit.dto;
 
 public class SampleAccount {
 
-    private String ownerName;
+    private String firstName;
+    private String lastName;
     private String accountNumber;
     private Double balance;
     private boolean locked;
 
-    public String getOwnerName() {
-        return ownerName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAccountNumber() {

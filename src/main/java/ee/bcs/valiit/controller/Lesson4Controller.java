@@ -23,10 +23,13 @@ public class Lesson4Controller {
     @PostMapping ("bank/createAccount")
     public void createAccount(@RequestBody SampleAccount accountDetails){
 
-        String sql = "INSERT INTO account (account_number, balance) VALUES(:dbaccountNumber, :dbbalance)";
+        String sql = "INSERT INTO account (first_name, last_name, account_number, balance, block) VALUES(:dbfirst_name, :dblast:name, :dbaccountNumber, :dbbalance, :dbblock)";
         Map <String, Object> paramMap = new HashMap<>();
+        paramMap.put("dbfirst_name",accountDetails.getFirstName());
+        paramMap.put("dblast_name", accountDetails.getLastName());
         paramMap.put("dbaccountNumber", accountDetails.getAccountNumber());
         paramMap.put("dbbalance", accountDetails.getBalance());
+        paramMap.put("dbblock", accountDetails.isLocked());
         jdbcTemplate.update(sql, paramMap);
     }
 
