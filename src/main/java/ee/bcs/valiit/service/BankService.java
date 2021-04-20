@@ -74,12 +74,11 @@ public class BankService {
         }
     }
     public String isLocked(String accountNumber){
-        return accountRepository.isLocked(accountNumber);
+        accountRepository.isLocked(accountNumber);
+        return "Account: " + accountNumber + "is blocked.";
     }
     public String unLock(String accountNumber){
-        return accountRepository.unLock(accountNumber);
+        accountRepository.unLock(accountNumber);
+        return "account: " + accountNumber + "is unlocked";
     }
-
-
-
 }

@@ -38,7 +38,6 @@ public class AccountRepository {
         String first_name = jdbcTemplate.queryForObject(sql1, paraMap, String.class);
         return first_name;
     }
-
     public Boolean showIsBlocked(String accountNumber){
         String sql = "SELECT block FROM account WHERE account_number = :dbAccountNumber";
         Map<String,Object> paramMap = new HashMap<>();
@@ -46,8 +45,6 @@ public class AccountRepository {
         Boolean blocked = jdbcTemplate.queryForObject(sql, paramMap, Boolean.class);
         return blocked;
     }
-
-
     public void update(String accountNumber, Double amount) {
         Map<String, Object> paramMap1 = new HashMap<>();
         paramMap1.put("dbAccno", accountNumber);
@@ -57,19 +54,18 @@ public class AccountRepository {
     }
     public String isLocked(String accountNumber){
         Map<String, Object> parmMap = new HashMap<>();
-        String sql = ("UPDATE account SET block = true WHERE :dbAccountNumber");
+        String sql = ("UPDATE account  SET block = true WHERE account_number = :dbAccountNumber ");
         parmMap.put("dbAccountNumber", accountNumber);
         jdbcTemplate.update(sql, parmMap);
         return "You're account " + accountNumber + "is Blocked. Have a nice day!";
     }
     public String unLock(String accountNumber) {
         Map<String, Object> parmMap = new HashMap<>();
-        String sql = ("UPDATE account SET block = false WHERE :dbAccountNumber");
+        String sql = ("UPDATE account SET block = false WHERE account_number = :dbAccountNumber");
         parmMap.put("dbAccountNumber", accountNumber);
         jdbcTemplate.update(sql, parmMap);
         return "You're account " + accountNumber + "is unlocked. Have a nice day!";
     }
-
     public void withdraw(String accountNumber, Double amount) {
 
 //        Double accountBalance = showBalance(accountNumber);
