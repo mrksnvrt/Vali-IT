@@ -29,7 +29,8 @@ public class Lesson4Controller {
     public String deposit(@RequestBody DepositWithdraw accountDetails) {
         String accountNumber = accountDetails.getAccountNumber();
         Double amount = accountDetails.getAmountOfMoney();
-        return bankService.deposit(accountNumber, amount);
+        String type = accountDetails.getType();
+        return bankService.deposit(accountNumber, amount, type);
     }
 
     //http://localhost:8080/bank/withdraw
@@ -37,7 +38,8 @@ public class Lesson4Controller {
     public String withdraw(@RequestBody DepositWithdraw accountDetails) {
         String accountNumber = accountDetails.getAccountNumber();
         Double amount = accountDetails.getAmountOfMoney();
-        return bankService.withdraw(accountNumber,amount);
+        String type = accountDetails.getType();
+        return bankService.withdraw(accountNumber,amount, type);
     }
 
     //http://localhost:8080/bank/transfer
@@ -47,7 +49,8 @@ public class Lesson4Controller {
         String fromAccount = accountDetails.getFromAccount();
         Double amountOfMoney = accountDetails.getBalance();
         String toAccount = accountDetails.getToAccount();
-        return bankService.transfer(fromAccount,amountOfMoney,toAccount);
+        String type = accountDetails.getType();
+        return bankService.transfer(fromAccount,amountOfMoney,toAccount, type);
     }
 
     //http://localhost:8080/bank/lock/{accountNumber}

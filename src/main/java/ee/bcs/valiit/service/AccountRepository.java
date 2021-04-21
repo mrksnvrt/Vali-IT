@@ -2,10 +2,16 @@ package ee.bcs.valiit.tasks;
 
 import ee.bcs.valiit.dto.CreateAccount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 
 
 @Repository
@@ -53,6 +59,20 @@ public class AccountRepository {
         String pin = jdbcTemplate.queryForObject(sql1, paraMap, String.class);
         return pin;
     }
+    public boolean showIfExistOrNah(String accountNumber){
+        Boolean isOrNah = false;
+        String sql = "SELECT account_number FROM account WHERE account_number = :dbAccountNumber";
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("dbAccountNumber", accountNumber);
+        String testAccount = jdbcTemplate.queryForObject(sql, paraMap, String.class);
+
+        if (jdbcTemplate == null) {
+            return false;
+        }
+
+            return true;
+
+    }
 
     public Boolean showIsBlocked(String accountNumber){
         String sql = "SELECT block FROM account WHERE account_number = :dbAccountNumber";
@@ -82,14 +102,16 @@ public class AccountRepository {
         jdbcTemplate.update(sql, parmMap);
         return "You're account " + accountNumber + "is unlocked. Have a nice day!";
     }
-    public void addTransAction(String fromAccount, Double amountOfMoney, String toAccount){
-        String transfer = "transfer";
-        String sql = "INSERT INTO transaction_history (from_account,to_account, transfer_amount, transfer_type) VALUES(:dbfirstAccount, :dblastAccount, :dbamount, :dbtype)";
+    public void addTransAction(String fromAccount, Double amountOfMoney, String toAccount, String type){
+        String sql = "INSERT INTO transaction_history (from_account,to_account, transfer_amount, transfer_type, date_time) VALUES(:dbfirstAccount, :dblastAccount, :dbamount, :dbtype, :dbdata)";
         Map<String, Object> paramMap = new HashMap<>();
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        Date date = new Date(time.getTime());
         paramMap.put("dbfirstAccount", fromAccount);
         paramMap.put("dblastAccount", toAccount);
         paramMap.put("dbamount", amountOfMoney);
-        paramMap.put("dbtype", transfer);
+        paramMap.put("dbtype", type);
+        paramMap.put("dbdata", date);
         jdbcTemplate.update(sql, paramMap);
     }
 

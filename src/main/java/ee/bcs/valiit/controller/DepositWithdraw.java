@@ -5,6 +5,7 @@ public class DepositWithdraw {
     private String accountNumber;
     private String pin;
     private Double amountOfMoney;
+    private String type;
 
     public String getAccountNumber() {
         return accountNumber;
@@ -28,5 +29,13 @@ public class DepositWithdraw {
 
     public void setAmountOfMoney(Double amountOfMoney) {
         this.amountOfMoney = amountOfMoney;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

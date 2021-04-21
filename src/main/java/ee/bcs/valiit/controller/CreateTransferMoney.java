@@ -8,7 +8,7 @@ public class CreateTransferMoney {
     private Double balance;
     private String toAccount;
     private String pin;
-
+    private String type;
 
     public String getFromAccount() {
         return fromAccount;
@@ -40,5 +40,13 @@ public class CreateTransferMoney {
 
     public void setPin(String pin) {
         this.pin = pin;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
