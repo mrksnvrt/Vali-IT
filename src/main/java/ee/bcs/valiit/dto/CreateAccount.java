@@ -1,10 +1,11 @@
 package ee.bcs.valiit.dto;
 
-public class SampleAccount {
+public class CreateAccount {
 
     private String firstName;
     private String lastName;
     private String accountNumber;
+    private String pin;
     private Double balance;
     private boolean locked;
 
@@ -30,6 +31,14 @@ public class SampleAccount {
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    public String getPin() {
+        return pin;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
     }
 
     public Double getBalance() {

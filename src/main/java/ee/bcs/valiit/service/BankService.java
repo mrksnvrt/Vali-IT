@@ -1,6 +1,6 @@
 package ee.bcs.valiit.service;
 
-import ee.bcs.valiit.dto.SampleAccount;
+import ee.bcs.valiit.dto.CreateAccount;
 import ee.bcs.valiit.tasks.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ public class BankService {
     @Autowired
     AccountRepository accountRepository;
 
-    public void createAccount(SampleAccount accountDetails) {
+    public void createAccount(CreateAccount accountDetails) {
         accountRepository.createAccount(accountDetails);
     }
 
@@ -63,6 +63,7 @@ public class BankService {
         }else if (amountOfMoney > fromAccountBalance) {
             return "Amount is higher of you're capability";
         } else {
+            accountRepository.addTransAction(fromAccount,amountOfMoney,toAccount);
             Double toAccountBalance = accountRepository.showBalance(toAccount);
             Double fromAccountNewBalance = fromAccountBalance - amountOfMoney;
             Double toAccountNewBalance = toAccountBalance + amountOfMoney;

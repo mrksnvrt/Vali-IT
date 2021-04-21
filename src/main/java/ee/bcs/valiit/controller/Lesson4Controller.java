@@ -1,6 +1,6 @@
 package ee.bcs.valiit.controller;
 
-import ee.bcs.valiit.dto.SampleAccount;
+import ee.bcs.valiit.dto.CreateAccount;
 import ee.bcs.valiit.service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,35 +13,40 @@ public class Lesson4Controller {
 
     //http://localhost:8080/bank/createAccount
     @PostMapping("bank/createAccount")
-    public void createAccount(@RequestBody SampleAccount accountDetails) {
+    public void createAccount(@RequestBody CreateAccount accountDetails) {
         bankService.createAccount(accountDetails);
     }
 
-    //http://localhost:8080/bank/showBalance/{accountNumber}
-    @GetMapping("bank/showBalance/{accountNumber}")
-    public String showBalance(@PathVariable("accountNumber") String accountNumber) {
+    //http://localhost:8080/bank/showBalance/
+    @GetMapping("bank/showBalance")
+    public String showBalance(@RequestBody DepositWithdraw accountDetails) {
+        String accountNumber = accountDetails.getAccountNumber();
         return bankService.showBalance(accountNumber);
     }
 
-    //http://localhost:8080/bank/deposit/{accountNumber}/{amount}
-    @PutMapping("bank/deposit/{accountNumber}/{amount}")
-    public String deposit(@PathVariable("accountNumber") String accountNumber,
-                          @PathVariable("amount") Double amount) {
-        return bankService.deposit(accountNumber,amount);
+    //http://localhost:8080/bank/deposit
+    @PutMapping("bank/deposit")
+    public String deposit(@RequestBody DepositWithdraw accountDetails) {
+        String accountNumber = accountDetails.getAccountNumber();
+        Double amount = accountDetails.getBalance();
+        return bankService.deposit(accountNumber, amount);
     }
 
-    //http://localhost:8080/bank/withdraw/{accountNumber}/{amount}
-    @PutMapping("bank/withdraw/{accountNumber}/{amount}")
-    public String withdraw(@PathVariable("accountNumber") String accountNumber,
-                           @PathVariable("amount") Double amount) {
+    //http://localhost:8080/bank/withdraw
+    @PutMapping("bank/withdraw")
+    public String withdraw(@RequestBody DepositWithdraw accountDetails) {
+        String accountNumber = accountDetails.getAccountNumber();
+        Double amount = accountDetails.getBalance();
         return bankService.withdraw(accountNumber,amount);
     }
 
-    //http://localhost:8080/bank/transfer/{fromAccount}/{amountOfMoney}/{toAccount}
-    @PutMapping("bank/transfer/{fromAccount}/{amountOfMoney}/{toAccount}")
-    public String transfer(@PathVariable("fromAccount") String fromAccount,
-                           @PathVariable("amountOfMoney") Double amountOfMoney,
-                           @PathVariable("toAccount") String toAccount) {
+    //http://localhost:8080/bank/transfer
+    @PutMapping("bank/transfer")
+    public String transfer(@RequestBody CreateTransferMoney accountDetails) {
+
+        String fromAccount = accountDetails.getFromAccount();
+        Double amountOfMoney = accountDetails.getBalance();
+        String toAccount = accountDetails.getToAccount();
         return bankService.transfer(fromAccount,amountOfMoney,toAccount);
     }
 

@@ -1,6 +1,6 @@
 package ee.bcs.valiit.tasks;
 
-import ee.bcs.valiit.dto.SampleAccount;
+import ee.bcs.valiit.dto.CreateAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -13,14 +13,15 @@ public class AccountRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public void createAccount(SampleAccount accountDetails) {
-        String sql = "INSERT INTO account (first_name, last_name, account_number, balance, block) VALUES(:dbfirst_name, :dblast_name, :dbaccountNumber, :dbbalance, :dbblock)";
+    public void createAccount(CreateAccount accountDetails) {
+        String sql = "INSERT INTO account (first_name, last_name, account_number, balance, block, pin) VALUES(:dbfirst_name, :dblast_name, :dbaccountNumber, :dbbalance, :dbblock, :dbPin)";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("dbfirst_name", accountDetails.getFirstName());
         paramMap.put("dblast_name", accountDetails.getLastName());
         paramMap.put("dbaccountNumber", accountDetails.getAccountNumber());
         paramMap.put("dbbalance", accountDetails.getBalance());
         paramMap.put("dbblock", accountDetails.isLocked());
+        paramMap.put("dbPin",accountDetails.getPin());
         jdbcTemplate.update(sql, paramMap);
     }
 
@@ -38,6 +39,21 @@ public class AccountRepository {
         String first_name = jdbcTemplate.queryForObject(sql1, paraMap, String.class);
         return first_name;
     }
+    public String showLastName(String accountNumber) {
+        String sql1 = "SELECT last_name FROM account WHERE account_number = :dbAccountNumber";
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("dbAccountNumber", accountNumber);
+        String last_name = jdbcTemplate.queryForObject(sql1, paraMap, String.class);
+        return last_name;
+    }
+    public String showPin(String accountNumber){
+        String sql1 = "SELECT pin FROM account WHERE account_number = :dbAccountNumber";
+        Map<String, Object> paraMap = new HashMap<>();
+        paraMap.put("dbAccountNumber", accountNumber);
+        String pin = jdbcTemplate.queryForObject(sql1, paraMap, String.class);
+        return pin;
+    }
+
     public Boolean showIsBlocked(String accountNumber){
         String sql = "SELECT block FROM account WHERE account_number = :dbAccountNumber";
         Map<String,Object> paramMap = new HashMap<>();
@@ -66,6 +82,19 @@ public class AccountRepository {
         jdbcTemplate.update(sql, parmMap);
         return "You're account " + accountNumber + "is unlocked. Have a nice day!";
     }
+    public void addTransAction(String fromAccount, Double amountOfMoney, String toAccount){
+        String transfer = "transfer";
+        String sql = "INSERT INTO transaction_history (from_account,to_account, transfer_amount, transfer_type) VALUES(:dbfirstAccount, :dblastAccount, :dbamount, :dbtype)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("dbfirstAccount", fromAccount);
+        paramMap.put("dblastAccount", toAccount);
+        paramMap.put("dbamount", amountOfMoney);
+        paramMap.put("dbtype", transfer);
+        jdbcTemplate.update(sql, paramMap);
+    }
+
+
+
     public void withdraw(String accountNumber, Double amount) {
 
 //        Double accountBalance = showBalance(accountNumber);
