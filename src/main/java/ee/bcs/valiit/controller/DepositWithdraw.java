@@ -4,7 +4,7 @@ public class DepositWithdraw {
 
     private String accountNumber;
     private String pin;
-    private Double balance;
+    private Double amountOfMoney;
 
     public String getAccountNumber() {
         return accountNumber;
@@ -22,11 +22,11 @@ public class DepositWithdraw {
         this.pin = pin;
     }
 
-    public Double getBalance() {
-        return balance;
+    public Double getAmountOfMoney() {
+        return amountOfMoney;
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
+    public void setAmountOfMoney(Double amountOfMoney) {
+        this.amountOfMoney = amountOfMoney;
     }
 }

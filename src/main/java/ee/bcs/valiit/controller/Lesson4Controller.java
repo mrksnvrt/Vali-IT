@@ -28,7 +28,7 @@ public class Lesson4Controller {
     @PutMapping("bank/deposit")
     public String deposit(@RequestBody DepositWithdraw accountDetails) {
         String accountNumber = accountDetails.getAccountNumber();
-        Double amount = accountDetails.getBalance();
+        Double amount = accountDetails.getAmountOfMoney();
         return bankService.deposit(accountNumber, amount);
     }
 
@@ -36,7 +36,7 @@ public class Lesson4Controller {
     @PutMapping("bank/withdraw")
     public String withdraw(@RequestBody DepositWithdraw accountDetails) {
         String accountNumber = accountDetails.getAccountNumber();
-        Double amount = accountDetails.getBalance();
+        Double amount = accountDetails.getAmountOfMoney();
         return bankService.withdraw(accountNumber,amount);
     }
 

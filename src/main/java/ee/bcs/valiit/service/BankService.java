@@ -21,8 +21,8 @@ public class BankService {
             String firstName = accountRepository.showFirstName(accountNumber);
             Double balance = accountRepository.showBalance(accountNumber);
             return "Hello " + firstName + ".\n" +
-                    " You're account balance is = " + balance + " eur." + "\n" +
-                    " Have a lovely day!";
+                    "You're account balance is " + balance + " eur." + "\n" +
+                    "Have a lovely day!";
         }
     }
 
@@ -31,12 +31,15 @@ public class BankService {
             return "You're account is blocked";
         }
         else if (amount <= 0) {
-            return "You Did not insert any amount of money.";
+            return "Please insert amount, which is higher than 0.";
         } else {
+            String firstName = accountRepository.showFirstName(accountNumber);
             Double beforeDeposit = accountRepository.showBalance(accountNumber);
             Double afterDeposit = beforeDeposit + amount;
             accountRepository.update(accountNumber,afterDeposit);
-            return "Youre money has been deposited, new balance is " + afterDeposit;
+            return "Hello " + firstName + "\n" +
+                    "You added " + amount + " eur to " + accountNumber + "\n" +
+                    "New balance is " + afterDeposit + " eur.";
         }
     }
 
@@ -45,12 +48,15 @@ public class BankService {
             return "You're account is blocked";
         }
         else if (amount <= 0) {
-            return "You Did not insert any amount of money.";
+            return "Please insert amount, which is higher than 0.";
         } else {
+            String firstName = accountRepository.showFirstName(accountNumber);
             Double beforeWithdraw = accountRepository.showBalance(accountNumber);
             Double afterWithdraw = beforeWithdraw - amount;
             accountRepository.update(accountNumber,afterWithdraw);
-            return "Youre money has been withdrawed, new balance is " + afterWithdraw;
+            return "Hello " + firstName + "\n" +
+                    "You withdrawn " + amount + " eur from " + accountNumber + "\n" +
+                    "New balance is " + afterWithdraw + " eur.";
         }
     }
     public String transfer( String fromAccount, Double amountOfMoney, String toAccount) {
@@ -59,19 +65,22 @@ public class BankService {
             return "One of the accounts is blocked";
         }
         else if (amountOfMoney <= 0) {
-            return "You Did not insert any amount of money.";
+            return "Please insert amount, which is higher than 0.";
         }else if (amountOfMoney > fromAccountBalance) {
-            return "Amount is higher of you're capability";
+            return "You do not have that much money on your account.";
         } else {
+            String firstName = accountRepository.showFirstName(fromAccount);
             accountRepository.addTransAction(fromAccount,amountOfMoney,toAccount);
             Double toAccountBalance = accountRepository.showBalance(toAccount);
             Double fromAccountNewBalance = fromAccountBalance - amountOfMoney;
             Double toAccountNewBalance = toAccountBalance + amountOfMoney;
             accountRepository.update(fromAccount,fromAccountNewBalance);
             accountRepository.update(toAccount,toAccountNewBalance);
-            return "Balance from account: " + fromAccount + " is lowered by" + amountOfMoney + "EUR. \n" +
-                    "New balance is: " + fromAccountNewBalance + "EUR. Second account: " + toAccount + "\n" +
-                    " new balance is " + toAccountBalance + "EUR";
+            return "Hello " + firstName + "\n" +
+                    "You transfered " + amountOfMoney + " eur from " + fromAccount + " to " + toAccount +"\n" +
+                    "Account " + fromAccount + " new balance is " + fromAccountNewBalance + " eur. \n" +
+                    "Account " + toAccount + " new balance is " + toAccountNewBalance + " eur.\n" +
+                    "Have a lovely day!!";
         }
     }
     public String isLocked(String accountNumber){
