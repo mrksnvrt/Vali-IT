@@ -2,7 +2,7 @@ package ee.bcs.valiit.service;
 
 import ee.bcs.valiit.dto.CreateAccount;
 import ee.bcs.valiit.solution.exception.SampleApplicationException;
-import ee.bcs.valiit.tasks.AccountRepository;
+import ee.bcs.valiit.service.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

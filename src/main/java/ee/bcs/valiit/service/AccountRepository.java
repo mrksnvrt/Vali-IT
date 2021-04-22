@@ -1,4 +1,4 @@
-package ee.bcs.valiit.tasks;
+package ee.bcs.valiit.service;
 
 import ee.bcs.valiit.dto.CreateAccount;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -105,13 +106,11 @@ public class AccountRepository {
     public void addTransAction(String fromAccount, Double amountOfMoney, String toAccount, String type){
         String sql = "INSERT INTO transaction_history (from_account,to_account, transfer_amount, transfer_type, date_time) VALUES(:dbfirstAccount, :dblastAccount, :dbamount, :dbtype, :dbdata)";
         Map<String, Object> paramMap = new HashMap<>();
-        Timestamp time = new Timestamp(System.currentTimeMillis());
-        Date date = new Date(time.getTime());
         paramMap.put("dbfirstAccount", fromAccount);
         paramMap.put("dblastAccount", toAccount);
         paramMap.put("dbamount", amountOfMoney);
         paramMap.put("dbtype", type);
-        paramMap.put("dbdata", date);
+        paramMap.put("dbdata", LocalDateTime.now());
         jdbcTemplate.update(sql, paramMap);
     }
 
