@@ -3,6 +3,7 @@ package ee.bcs.valiit.service;
 import ee.bcs.valiit.dto.CreateAccount;
 import ee.bcs.valiit.solution.exception.SampleApplicationException;
 import ee.bcs.valiit.service.AccountRepository;
+import ee.bcs.valiit.solution.hibernate.SampleHibernateAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,14 @@ public class BankService {
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    private SampleHibernateAccountRepository hibernateAccountRepository;
+
     public void createAccount(CreateAccount accountDetails) {
+
+        if(accountRepository.showIfExistOrNah(accountDetails.getAccountNumber()) == false) {
+            throw new SampleApplicationException("You have to insert amount, which is higher than 0.");
+        }
         accountRepository.createAccount(accountDetails);
     }
 
@@ -20,12 +28,17 @@ public class BankService {
             throw new SampleApplicationException("You can not take any action with this account, because it is blocked");
         }else {
             String firstName = accountRepository.showFirstName(accountNumber);
-            Double balance = accountRepository.showBalance(accountNumber);
+            //Double balance = accountRepository.showBalance(accountNumber);
+
+            Double balance = hibernateAccountRepository.getOne(accountNumber).getBalance();
             return "Hello " + firstName + ".\n" +
                     "You're account balance is " + balance + " eur." + "\n" +
                     "Have a lovely day!";
         }
     }
+
+
+
 
     public String deposit(String accountNumber, Double amount, String type) {
         if (accountRepository.showIsBlocked(accountNumber)==true){

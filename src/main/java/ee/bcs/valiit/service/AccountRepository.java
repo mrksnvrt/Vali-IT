@@ -60,18 +60,18 @@ public class AccountRepository {
         String pin = jdbcTemplate.queryForObject(sql1, paraMap, String.class);
         return pin;
     }
+
+    //select account * from
     public boolean showIfExistOrNah(String accountNumber){
-        Boolean isOrNah = false;
-        String sql = "SELECT account_number FROM account WHERE account_number = :dbAccountNumber";
+        String sql = "SELECT count (*) FROM account WHERE account_number = :dbAccountNumber";
         Map<String, Object> paraMap = new HashMap<>();
         paraMap.put("dbAccountNumber", accountNumber);
-        String testAccount = jdbcTemplate.queryForObject(sql, paraMap, String.class);
+        Integer testAccount = jdbcTemplate.queryForObject(sql, paraMap, Integer.class);
 
-        if (jdbcTemplate == null) {
-            return false;
-        }
-
+        if (testAccount == 0) {
             return true;
+        }
+        return false;
 
     }
 
