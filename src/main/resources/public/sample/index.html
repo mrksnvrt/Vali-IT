@@ -5,25 +5,53 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Min</h1>
-    a: <input id="minA"> b: <input id="minB"> <button id="minButton">Min</button>
-    <p>
-        Vastus on: <span id="minAnswer"></span>
-    </p>
-    <script>
-        let minA = document.getElementById("minA");
-        let minB = document.getElementById("minB");
-        let minButton = document.getElementById("minButton");
-        minButton.onclick = function() {
-            let minAnswer = document.getElementById("minAnswer");
-            let a = minA.value;
-            let b = minB.value;
-            if(Number(a) < Number(b)){
-                minAnswer.innerText = a;
-            } else {
-                minAnswer.innerText = b;
-            }
+//MINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+<h1>Min</h1>
+a: <input id="minA"> b: <input id="minB">
+<button id="minButton">Min</button>
+<p>
+    Vastus on: <span id="minAnswer"></span>
+</p>
+//MAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+<h1>Max</h1>
+a: <input id="maxA"> b: <input id="maxB">
+<button id="maxButton">Max</button>
+<p>
+    Vastus on: <span id="maxAnswer"></span>
+</p>
+//ABSOLUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUT
+
+<script>
+    //MINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+    let minA = document.getElementById("minA");
+    let minB = document.getElementById("minB");
+    let minButton = document.getElementById("minButton");
+    minButton.onclick = function () {
+        let minAnswer = document.getElementById("minAnswer");
+        let a = minA.value;
+        let b = minB.value;
+        if (Number(a) < Number(b)) {
+            minAnswer.innerText = a;
+        } else {
+            minAnswer.innerText = b;
         }
-    </script>
+    }
+    //MAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    let maxA = document.getElementById("maxA");
+    let maxB = document.getElementById("maxB");
+    let maxButton = document.getElementById("maxButton");
+    maxButton.onclick = function () {
+        let maxAnswer = document.getElementById("maxAnswer");
+        let a = maxA.value;
+        let b = minB.value;
+        if (Number(a) > Number(b)) {
+            maxAnswer.innerText = a;
+        } else {
+            maxAnswer.innerText = b;
+        }
+
+    }
+
+</script>
 </body>
 </html>
