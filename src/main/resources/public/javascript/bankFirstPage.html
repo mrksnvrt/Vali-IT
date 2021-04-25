@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login and Registration Form Design</title>
+    <link rel="stylesheet" href="bankFirstPageStyle.css">
+</head>
+<body>
+<div class="login-page">
+<div class ="form">
+<form class ="register-form">
+    <input type="accountNumber" placeholder= "account number" />
+    <input type="firstName" placeholder="first name"/>
+    <input type="lastName" placeholder="last name"/>
+    <input type="pin" placeholder="pin"/>
+    <input type="balance" placeholder="balance"/>
+    <button id="createAccountButton">Create</button>
+    <p class="message">Already Registered? <a href="#">Login</a>
+    </p>
+    </form>
+    <form class="login-form">
+        <input type = "text" placeholder="account number"/>
+        <input type = "password" placeholder="pin"/>
+        <button>login</button>
+        <p class="message">Not registered?<a href ="#">Register</a></p>
+
+    </form>
+
+</div>
+</div>
+
+<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+
+<script>
+    $('.message a').click(function () {
+        $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    });
+</script>
+
+<script>
+    let accountNumber = document.getElementById("accountNumber");
+    let firstName = document.getElementById("firstName");
+    let lastName = document.getElementById("lastName");
+    let pin = document.getElementById("pin");
+    let balance = document.getElementById("balance");
+    let CreateButton = document.getElementById("createAccountButton");
+
+    CreateButton.onclick = function () {
+        let requestObject = {
+            'accountNumber': accountNumber.value,
+            'firstName': firstName.value,
+            'lastName': lastName.value,
+            'pin': pin.value,
+            'balance': balance.value
+        }
+        let url = "http://localhost:8080/bank/createAccount";
+        let configuration = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestObject)
+        }
+        fetch(url, configuration);
+    }
+</script>
+
+</body>
+</html>
