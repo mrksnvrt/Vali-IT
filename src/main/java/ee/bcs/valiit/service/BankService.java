@@ -11,26 +11,42 @@ import org.springframework.stereotype.Service;
 public class BankService {
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    AccountRepo accountRepo;
 
     @Autowired
     private SampleHibernateAccountRepository hibernateAccountRepository;
 
-    public void createAccount(CreateAccount accountDetails) {
 
-        if(accountRepository.showIfExistOrNah(accountDetails.getAccountNumber()) == false) {
-            throw new SampleApplicationException("You have to insert amount, which is higher than 0.");
-        }
-        accountRepository.createAccount(accountDetails);
+
+
+
+    public String createAccount(CreateAccount accountDetails) {
+
+        //if(accountRepository.showIfExistOrNah(accountDetails.getAccountNumber()) == false) {
+            //throw new SampleApplicationException("You have to insert amount, which is higher than 0.");
+       // }
+
+        AccountEntity account = new AccountEntity();
+        account.setAccountNumber(accountDetails.getAccountNumber());
+        account.setBalance(accountDetails.getBalance());
+        accountRepo.save(account);
+        return "Account added = " + accountDetails.getAccountNumber() + ", with balance of = " + accountDetails.getBalance();
+
+
+
+
+        //accountRepository.createAccount(accountDetails);
     }
 
     public String showBalance(String accountNumber) {
         if (accountRepository.showIsBlocked(accountNumber)==true){
             throw new SampleApplicationException("You can not take any action with this account, because it is blocked");
         }else {
-            String firstName = accountRepository.showFirstName(accountNumber);
+            String firstName = accountRepo.getOne(accountNumber).getFirstName();
             //Double balance = accountRepository.showBalance(accountNumber);
 
-            Double balance = hibernateAccountRepository.getOne(accountNumber).getBalance();
+            Double balance = accountRepo.getOne(accountNumber).getBalance();
             return "Hello " + firstName + ".\n" +
                     "You're account balance is " + balance + " eur." + "\n" +
                     "Have a lovely day!";
