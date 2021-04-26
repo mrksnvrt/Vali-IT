@@ -1,17 +1,17 @@
-body{
+body {
     background-image: url(black-brick-wall-textured-background_53876-63572.jpeg);
     height: 100vh;
     background-size: cover;
     background-position: center;
 }
 
-.login-page{
+.login-page {
     width: 360px;
     padding: 10% 0 0;
     margin: auto;
 }
 
-.form{
+.form {
     postion: relative;
     z-index: 1;
     background: #ffffff;
@@ -21,8 +21,8 @@ body{
     text-align: center;
 }
 
-.form input{
-    font-family: "Roboto",sans-serif;
+.form input {
+    font-family: "Roboto", sans-serif;
     outline: 1;
     background: #f2f2f2;
     width: 100%;
@@ -34,7 +34,8 @@ body{
 
 }
 
-.form button{
+
+.form button {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
@@ -47,21 +48,26 @@ body{
     cursor: pointer;
 }
 
-.form button:hover,.form button:active{
+.form button:hover, .form button:active {
     background: black;
 }
 
-.form .message{
+.form .message {
     margin: 15px 0 0;
     color: black;
     font-size: 12px;
 }
 
-.form message a{
+.form message a {
     color: #4CAF50;
     text-decoration: none;
 }
-.form .register-form{
+
+.form .register-form {
     display: none;
 }
+
+
+
+
 

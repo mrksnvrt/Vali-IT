@@ -1,26 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Bank</title>
 </head>
-
-<table border = "700">
-    <tr>
-        <td>TereMari</td>
-
-    </tr>
-    <tr>
-        <td>TereJüri</td>
-
-
-    </tr>
-
-</table>
-
-
 <body>
-
+<p> tere?</p>
+<h2> Loo konto</h2>
+account number: <input id="account_number" type="text"/>
+<br>
+<br>
+balance: <input id="balance" type="number"/>
+<br>
+<br>
+first name: <input id="first_name" type="text"/>
+<br>
+<br>
+last name: <input id="last_name" type="text"/>
+<br>
+<br>
+Create Account: <input id="submit" type="submit"/>
+<h2> Deposit</h2>
+account number: <input id="account_deposit" type="text"/>
+<br>
+<br>
+insert money: <input id="depositMoney" type="number"/>
+<br>
+<br>
+sendDepo: <input id="sendDepo" type="submit"/>
+<br>
+<h2> Withdraw</h2>
+account number: <input id="account_withdraw" type="text"/>
+<br>
+<br>
+insert money: <input id="withdrawMoney" type="number"/>
+<br>
+<br>
+Withdraw: <input id="withdraw" type="submit"/>
+<br>
 </body>
+<script type="text/javascript">
+    let accountNumber = document.getElementById("account_number");
+    let balance = document.getElementById("balance");
+    let firstName = document.getElementById("first_name");
+    let lastName = document.getElementById("last_name");
+    let submit = document.getElementById("submit");
+    submit.onclick = function () {
+        let requestObject = {
+            'accountNumber': accountNumber.value,
+            'balance': balance.value,
+            'firstName': firstName.value,
+            'lastName': lastName.value
+        }
+        let url = "http://localhost:8080/bank/createAccount";
+        let configuration = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestObject)
+        }
+        fetch(url, configuration);
+    }
+    let deposit = document.getElementById("depositMoney");
+
+    let sendDepo = document.getElementById("sendDepo");
+    let accountDeposit = document.getElementById("account_deposit")
+
+    sendDepo.onclick = function () {
+        let requestObject = {
+            'accountNumber': accountDeposit.value,
+            'amountOfMoney': deposit.value,
+            'type': "Deposit"
+
+        }
+        let url = "http://localhost:8080/bank/deposit";
+        let configuration = {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestObject)
+        }
+        fetch(url, configuration);
+    }
+    let withdrawMoney = document.getElementById("withdrawMoney");
+    let withdraw = document.getElementById("withdraw");
+    let accountWithdraw = document.getElementById("account_withdraw")
+
+    withdraw.onclick = function () {
+        let requestObject = {
+            'accountNumber': accountWithdraw.value,
+            'amountOfMoney': withdrawMoney.value,
+            'type': "withdraw"
+
+        }
+        let url = "http://localhost:8080/bank/withdraw";
+        let configuration = {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestObject)
+        }
+        fetch(url, configuration);
+    }
+
+
+
+
+</script>
+
 </html>

@@ -30,6 +30,8 @@ public class BankService {
         AccountEntity account = new AccountEntity();
         account.setAccountNumber(accountDetails.getAccountNumber());
         account.setBalance(accountDetails.getBalance());
+        account.setFirstName(accountDetails.getFirstName());
+        account.setLastName(accountDetails.getLastName());
         accountRepo.save(account);
         return "Account added = " + accountDetails.getAccountNumber() + ", with balance of = " + accountDetails.getBalance();
 
@@ -57,26 +59,18 @@ public class BankService {
 
 
     public String deposit(String accountNumber, Double amount, String type) {
-        if (accountRepo.getOne(accountNumber).isBlock()==true){
+        AccountEntity account = accountRepo.getOne(accountNumber);
+        if (account.isBlock()==true){
             throw new SampleApplicationException("You can not take any action with this account, because it is blocked");
         }
         else if (amount <= 0) {
             throw new SampleApplicationException("You have to insert amount, which is higher than 0.");
         } else {
-            AccountEntity account = new AccountEntity();
             accountRepository.addTransAction(accountNumber,amount, accountNumber, type);
-            String firstName = accountRepo.getOne(accountNumber).getFirstName();
-            Double beforeDeposit = accountRepo.getOne(accountNumber).getBalance();
-            Double afterDeposit = beforeDeposit + amount;
-            account.setAccountNumber(accountNumber);
+            Double afterDeposit = account.getBalance() + amount;
             account.setBalance(afterDeposit);
             accountRepo.save(account);
-
-
-            //Double beforeDeposit = accountRepository.showBalance(accountNumber);
-            //Double afterDeposit = beforeDeposit + amount;
-            //accountRepository.update(accountNumber,afterDeposit);
-            return "Hello " + firstName + "\n" +
+            return "Hello " + account.getFirstName() + "\n" +
                     "You added " + amount + " eur to " + accountNumber + "\n" +
                     "New balance is " + afterDeposit + " eur.";
         }

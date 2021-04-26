@@ -12,6 +12,7 @@ public class Lesson4Controller {
     private BankService bankService;
 
     //http://localhost:8080/bank/createAccount
+    @CrossOrigin
     @PostMapping("bank/createAccount")
     public void createAccount(@RequestBody CreateAccount accountDetails) {
         bankService.createAccount(accountDetails);
@@ -25,6 +26,7 @@ public class Lesson4Controller {
     }
 
     //http://localhost:8080/bank/deposit
+    @CrossOrigin
     @PutMapping("bank/deposit")
     public String deposit(@RequestBody DepositWithdraw accountDetails) {
         String accountNumber = accountDetails.getAccountNumber();
@@ -34,6 +36,7 @@ public class Lesson4Controller {
     }
 
     //http://localhost:8080/bank/withdraw
+    @CrossOrigin
     @PutMapping("bank/withdraw")
     public String withdraw(@RequestBody DepositWithdraw accountDetails) {
         String accountNumber = accountDetails.getAccountNumber();

@@ -7,26 +7,26 @@
 </head>
 <body>
 <div class="login-page">
-<div class ="form">
-<form class ="register-form">
-    <input type="accountNumber" placeholder= "account number" />
-    <input type="firstName" placeholder="first name"/>
-    <input type="lastName" placeholder="last name"/>
-    <input type="pin" placeholder="pin"/>
-    <input type="balance" placeholder="balance"/>
-    <button id="createAccountButton">Create</button>
-    <p class="message">Already Registered? <a href="#">Login</a>
-    </p>
-    </form>
-    <form class="login-form">
-        <input type = "text" placeholder="account number"/>
-        <input type = "password" placeholder="pin"/>
-        <button>login</button>
-        <p class="message">Not registered?<a href ="#">Register</a></p>
+    <div class="form">
+        <form class="register-form">
+            <input type="text" placeholder="account number" id="account_number"/>
+            <input type="text" placeholder="first name" id="first_name"/>
+            <input type="text" placeholder="last name" id="last_name"/>
+            <input type="number" placeholder="balance" id="balance"/>
+            <button id="createAccountButton">Create</button>
+            <p class="message">Already Registered? <a href="#">Login</a>
+            </p>
+        </form>
+        <form class="login-form">
+            <input type="text" placeholder="account number" id="logInaccount_number"/>
+            <input type="password" placeholder="pin" id="password"/>
+            <button id="logInAccountButton">login</button>
+            <p class="message">Not registered?<a href="#">Register</a></p>
+        </form>
 
-    </form>
+    </div>
 
-</div>
+
 </div>
 
 <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
@@ -38,20 +38,19 @@
 </script>
 
 <script>
-    let accountNumber = document.getElementById("accountNumber");
-    let firstName = document.getElementById("firstName");
-    let lastName = document.getElementById("lastName");
-    let pin = document.getElementById("pin");
+    let accountNumber = document.getElementById("account_number");
+    let firstName = document.getElementById("first_name");
+    let lastName = document.getElementById("last_name");
+
     let balance = document.getElementById("balance");
     let CreateButton = document.getElementById("createAccountButton");
 
     CreateButton.onclick = function () {
         let requestObject = {
             'accountNumber': accountNumber.value,
+            'balance': balance.value,
             'firstName': firstName.value,
-            'lastName': lastName.value,
-            'pin': pin.value,
-            'balance': balance.value
+            'lastName': lastName.value
         }
         let url = "http://localhost:8080/bank/createAccount";
         let configuration = {
