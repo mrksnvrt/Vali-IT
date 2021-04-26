@@ -46,6 +46,7 @@ public class Lesson4Controller {
     }
 
     //http://localhost:8080/bank/transfer
+    @CrossOrigin
     @PutMapping("bank/transfer")
     public String transfer(@RequestBody CreateTransferMoney accountDetails) {
 

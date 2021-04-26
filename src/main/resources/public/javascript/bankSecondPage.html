@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deposit, Withdraw and Transfer</title>
+    <link rel="stylesheet" href="bankFirstPageStyle.css">
+</head>
+<body>
+<div class="login-page">
+    <div class="form">
+        <form class="register-form">
+            <input id="account_deposit" type="text" placeholder="account number"/><td>
+            <input id="depositMoney" type="number" placeholder="amount"/></td>
+            <input type="text" placeholder="deposit/withdraw" id="depWith"/>
+            <button id="actionButton">Action</button>
+            <p class="message">Want to make transfer? <a href="#">Lets do it</a>
+            </p>
+        </form>
+        <form class="login-form">
+            <input type="text" placeholder="account number" id="from_account"/>
+            <input type="text" placeholder="account number" id="to_account"/>
+            <input type="number" placeholder="amount" id="amount"/>
+            <button id="transferButton">login</button>
+            <p class="message">Deposit/withdraw?<a href="#">lezz go</a></p>
+        </form>
+
+    </div>
+
+
+</div>
+
+<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+
+<script>
+    $('.message a').click(function () {
+        $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    });
+</script>
+
+<script>
+
+    let deposit = document.getElementById("depositMoney");
+    let whatToWrie = document.getElementById("depWith")
+
+    let action = document.getElementById("actionButton");
+    let accountDeposit = document.getElementById("account_deposit")
+
+    action.onclick = function () {
+        let requestObject = {
+            'accountNumber': accountDeposit.value,
+            'amountOfMoney': deposit.value,
+            'type': whatToWrie.value
+
+        }
+        let url = "http://localhost:8080/bank/" + whatToWrie.value;
+        let configuration = {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestObject)
+        }
+        fetch(url, configuration)
+            .then(response => response.text())
+            .then(function (response) {
+                alert(response)
+            })
+    }
+
+
+</script>
+
+
+
+</body>
+</html>
