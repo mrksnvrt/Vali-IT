@@ -1,4 +1,4 @@
-package ee.bcs.valiit.dto;
+package ee.bcs.valiit.bank.bankDto;
 
 public class CreateAccount {
 

@@ -1,4 +1,4 @@
-package ee.bcs.valiit.service;
+package ee.bcs.valiit.bank.bankDto;
 
 
 import javax.persistence.Entity;

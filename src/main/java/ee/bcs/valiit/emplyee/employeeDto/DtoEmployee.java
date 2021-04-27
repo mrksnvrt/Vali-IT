@@ -1,4 +1,4 @@
-package ee.bcs.valiit.employee;
+package ee.bcs.valiit.emplyee.employeeDto;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

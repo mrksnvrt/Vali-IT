@@ -1,7 +1,6 @@
-package ee.bcs.valiit.employee;
+package ee.bcs.valiit.emplyee.employeeRepository;
 
 
-import ee.bcs.valiit.dto.CreateAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;

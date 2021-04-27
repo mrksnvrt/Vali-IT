@@ -1,15 +1,11 @@
-package ee.bcs.valiit.service;
+package ee.bcs.valiit.bank.bankRepository;
 
-import ee.bcs.valiit.dto.CreateAccount;
+import ee.bcs.valiit.bank.bankDto.CreateAccount;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 

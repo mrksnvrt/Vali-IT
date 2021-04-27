@@ -1,8 +1,10 @@
-package ee.bcs.valiit.service;
+package ee.bcs.valiit.bank.bankService;
 
-import ee.bcs.valiit.dto.CreateAccount;
+import ee.bcs.valiit.bank.bankDto.CreateAccount;
+import ee.bcs.valiit.bank.bankDto.AccountEntity;
+import ee.bcs.valiit.bank.bankRepository.AccountRepo;
 import ee.bcs.valiit.solution.exception.SampleApplicationException;
-import ee.bcs.valiit.service.AccountRepository;
+import ee.bcs.valiit.bank.bankRepository.AccountRepository;
 import ee.bcs.valiit.solution.hibernate.SampleHibernateAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

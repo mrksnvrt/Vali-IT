@@ -1,13 +1,15 @@
-package ee.bcs.valiit.controller;
+package ee.bcs.valiit.bank.bankController;
 
-import ee.bcs.valiit.dto.CreateAccount;
-import ee.bcs.valiit.service.BankService;
+import ee.bcs.valiit.bank.bankDto.CreateTransferMoney;
+import ee.bcs.valiit.bank.bankDto.DepositWithdraw;
+import ee.bcs.valiit.bank.bankDto.CreateAccount;
+import ee.bcs.valiit.bank.bankService.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-public class Lesson4Controller {
+public class BankController {
     @Autowired
     private BankService bankService;
 

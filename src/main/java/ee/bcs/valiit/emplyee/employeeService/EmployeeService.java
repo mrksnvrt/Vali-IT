@@ -1,7 +1,6 @@
-package ee.bcs.valiit.employee;
+package ee.bcs.valiit.emplyee.employeeService;
 
-import ee.bcs.valiit.dto.CreateAccount;
-import ee.bcs.valiit.solution.exception.SampleApplicationException;
+import ee.bcs.valiit.emplyee.employeeRepository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

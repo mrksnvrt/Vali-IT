@@ -1,4 +1,4 @@
-package ee.bcs.valiit.controller;
+package ee.bcs.valiit.controller.lessons;
 
 import java.util.Random;
 import java.util.Scanner;

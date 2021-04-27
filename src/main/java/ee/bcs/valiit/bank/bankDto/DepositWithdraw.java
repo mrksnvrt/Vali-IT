@@ -1,4 +1,4 @@
-package ee.bcs.valiit.controller;
+package ee.bcs.valiit.bank.bankDto;
 
 public class DepositWithdraw {
 
