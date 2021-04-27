@@ -1,6 +1,6 @@
 package ee.bcs.valiit.bank.bankDto;
 
-public class DepositWithdraw {
+public class AccoundCommand {
 
     private String accountNumber;
     private String pin;

@@ -9,8 +9,6 @@ import javax.persistence.Table;
 @Entity
 
 public class AccountEntity {
-
-
         //auto increment not ID
         //@GeneratedValue (strategy = GenerationType.IDENTITY)
         @Id
