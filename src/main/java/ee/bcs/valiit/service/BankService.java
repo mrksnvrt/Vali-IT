@@ -77,24 +77,27 @@ public class BankService {
     }
 
     public String withdraw(String accountNumber, Double amount, String type) {
-        if (accountRepository.showIsBlocked(accountNumber)==true){
+        AccountEntity account = accountRepo.getOne(accountNumber);
+        if (account.isBlock()==true){
             throw new SampleApplicationException("You can not take any action with this account, because it is blocked");
         }
         else if (amount <= 0) {
             throw new SampleApplicationException("You have to insert amount, which is higher than 0.");
         } else {
             accountRepository.addTransAction(accountNumber,amount, accountNumber, type);
-            String firstName = accountRepository.showFirstName(accountNumber);
-            Double beforeWithdraw = accountRepository.showBalance(accountNumber);
-            Double afterWithdraw = beforeWithdraw - amount;
-            accountRepository.update(accountNumber,afterWithdraw);
-            return "Hello " + firstName + "\n" +
+            Double afterWithdraw = account.getBalance() - amount;
+            account.setBalance(afterWithdraw);
+            accountRepo.save(account);
+            //accountRepository.update(accountNumber,afterWithdraw);
+            return "Hello " + account.getFirstName() + "\n" +
                     "You withdrawn " + amount + " eur from " + accountNumber + "\n" +
                     "New balance is " + afterWithdraw + " eur.";
         }
     }
     public String transfer( String fromAccount, Double amountOfMoney, String toAccount, String type) {
-        Double fromAccountBalance = accountRepository.showBalance(fromAccount);
+        AccountEntity account = accountRepo.getOne(fromAccount);
+        Double fromAccountBalance = account.getBalance();
+        //Double fromAccountBalance = accountRepository.showBalance(fromAccount);
         if (accountRepository.showIsBlocked(fromAccount)==true || accountRepository.showIsBlocked(toAccount)==true){
             throw new SampleApplicationException("You can not take this action, because one of the accounts is blocked");
         }
@@ -105,14 +108,15 @@ public class BankService {
                     "If you want to send money from you're account to another, you need to make sure that the amount you inserted aint no biggga than you're balance" +
                     "Have a lovely day!");
         } else {
-            String firstName = accountRepository.showFirstName(fromAccount);
+            //Double toAccountBalance = account1.getBalance();
+            //String firstName = accountRepository.showFirstName(fromAccount);
             accountRepository.addTransAction(fromAccount,amountOfMoney,toAccount,type);
-            Double toAccountBalance = accountRepository.showBalance(toAccount);
-            Double fromAccountNewBalance = fromAccountBalance - amountOfMoney;
-            Double toAccountNewBalance = toAccountBalance + amountOfMoney;
+            AccountEntity secondAccountTo = accountRepo.getOne(fromAccount);
+            Double fromAccountNewBalance = account.getBalance() - amountOfMoney;
+            Double toAccountNewBalance = secondAccountTo.getBalance() + amountOfMoney;
             accountRepository.update(fromAccount,fromAccountNewBalance);
             accountRepository.update(toAccount,toAccountNewBalance);
-            return "Hello " + firstName + "\n" +
+            return "Hello " + account.getFirstName() + "\n" +
                     "You transfered " + amountOfMoney + " eur from " + fromAccount + " to " + toAccount +"\n" +
                     "Account " + fromAccount + " new balance is " + fromAccountNewBalance + " eur. \n" +
                     "Account " + toAccount + " new balance is " + toAccountNewBalance + " eur.\n" +
@@ -120,11 +124,15 @@ public class BankService {
         }
     }
     public String isLocked(String accountNumber){
-        accountRepository.isLocked(accountNumber);
+        AccountEntity account = accountRepo.getOne(accountNumber);
+        account.setBlock(true);
+        accountRepo.save(account);
         return "Account: " + accountNumber + "is blocked.";
     }
     public String unLock(String accountNumber){
-        accountRepository.unLock(accountNumber);
+        AccountEntity account = accountRepo.getOne(accountNumber);
+        account.setBlock(false);
+        //accountRepository.unLock(accountNumber);
         return "account: " + accountNumber + "is unlocked";
     }
 }
