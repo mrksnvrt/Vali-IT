@@ -25,14 +25,25 @@ public class BankController {
 
     //SHOW ONE ACCOUNT BALANCE
     //http://localhost:8080/bank/showBalance/
+    @CrossOrigin
     @GetMapping("bank/showBalance")
     public String showBalance(@RequestBody AccoundCommand accountDetails) {
         String accountNumber = accountDetails.getAccountNumber();
         return bankService.showBalance(accountNumber);
     }
 
+    //SHOW ONE ACCOUNT BALANCE PATHVARIABLE
+    //http://localhost:8080/bank/showBalance/ + EE
+    @CrossOrigin
+    @GetMapping("bank/showBalance/{accountNumber}")
+    public String showBalancePath(@PathVariable ("accountNumber") String accountNumber) {
+
+        return bankService.showBalance(accountNumber);
+    }
+
     //GET ALL
     //http://localhost:8080/allAccounts
+    @CrossOrigin
     @GetMapping("allAccounts")
     public List<AccountEntity> allAccounts() {
         return bankService.allAccounts();
