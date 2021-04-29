@@ -2,6 +2,7 @@ package ee.bcs.valiit.bank.bankController;
 
 import ee.bcs.valiit.bank.bankDto.*;
 import ee.bcs.valiit.bank.bankService.BankService;
+import ee.bcs.valiit.bank.bankService.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -10,15 +11,8 @@ import java.util.List;
 @RestController
 public class BankController {
     @Autowired
-    private BankService bankService;
+    BankService bankService;
 
-    //CREATE ACCOUNT
-    //http://localhost:8080/bank/createAccount
-    @CrossOrigin
-    @PostMapping("bank/createAccount")
-    public void createAccount(@RequestBody CreateAccount accountDetails) {
-        bankService.createAccount(accountDetails);
-    }
 
     //SHOW ONE ACCOUNT BALANCE
     //http://localhost:8080/bank/showBalance/
@@ -39,18 +33,18 @@ public class BankController {
     }
 
     //GET ALL
-    //http://localhost:8080/allAccounts
+    //http://localhost:8080/bank/allAccounts
     @CrossOrigin
-    @GetMapping("allAccounts")
+    @GetMapping("bank/allAccounts")
     public List<AccountEntity> allAccounts() {
 
         return bankService.allAccounts();
     }
 
     //GET ALL TRANSACTIONS
-    //http://localhost:8080/allTransactions
+    //http://localhost:8080/bank/allTransactions
     @CrossOrigin
-    @GetMapping("allTransactions")
+    @GetMapping("bank/allTransactions")
     public List<TransferEntity> allTransactions() {
         return bankService.allTransactions();
     }
@@ -108,6 +102,16 @@ public class BankController {
         return bankService.unLock(accountNumber);
     }
 }
+
+
+//    //CREATE ACCOUNT
+//    //http://localhost:8080/bank/createAccount
+//    @CrossOrigin
+//    @PostMapping("bank/createAccount")
+//    public void createAccount(@RequestBody CreateAccount accountDetails) {
+//        bankService.createAccount(accountDetails);
+//    }
+
 
 
 

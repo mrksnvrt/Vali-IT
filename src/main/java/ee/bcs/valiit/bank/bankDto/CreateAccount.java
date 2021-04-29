@@ -8,6 +8,8 @@ public class CreateAccount {
     private String pin;
     private Double balance;
     private boolean locked;
+    private String username;
+    private String password;
 
     public String getFirstName() {
         return firstName;
@@ -55,5 +57,21 @@ public class CreateAccount {
 
     public void setLocked(boolean locked) {
         this.locked = locked;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

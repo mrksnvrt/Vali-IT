@@ -3,8 +3,10 @@ package ee.bcs.valiit.bank.bankService;
 import ee.bcs.valiit.bank.bankDto.CreateAccount;
 import ee.bcs.valiit.bank.bankDto.AccountEntity;
 import ee.bcs.valiit.bank.bankDto.TransferEntity;
+import ee.bcs.valiit.bank.bankDto.UsernameEntity;
 import ee.bcs.valiit.bank.bankRepository.AccountRepo;
 import ee.bcs.valiit.bank.bankRepository.TransActionRepo;
+import ee.bcs.valiit.bank.bankRepository.UserRepo;
 import ee.bcs.valiit.solution.exception.SampleApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,17 +21,8 @@ public class BankService {
     AccountRepo accountRepo;
     @Autowired
     TransActionRepo transActionRepo;
-
-    //CREATE ACCOUNT
-    public String createAccount(CreateAccount accountDetails) {
-        AccountEntity account = new AccountEntity();
-        account.setAccountNumber(accountDetails.getAccountNumber());
-        account.setBalance(accountDetails.getBalance());
-        account.setFirstName(accountDetails.getFirstName());
-        account.setLastName(accountDetails.getLastName());
-        accountRepo.save(account);
-        return "Account added = " + accountDetails.getAccountNumber() + ", with balance of = " + accountDetails.getBalance();
-    }
+    @Autowired
+    UserRepo userRepo;
 
     //SHOW BALANCE
     public String showBalance(String accountNumber) {
@@ -155,3 +148,24 @@ public class BankService {
         return "account: " + accountNumber + " is unlocked";
     }
 }
+
+
+
+
+//    //CREATE ACCOUNT
+//    public String createAccount(CreateAccount accountDetails) {
+//        AccountEntity account = new AccountEntity();
+//        account.setAccountNumber(accountDetails.getAccountNumber());
+//        account.setBalance(accountDetails.getBalance());
+//        account.setFirstName(accountDetails.getFirstName());
+//        account.setLastName(accountDetails.getLastName());
+//        accountRepo.save(account);
+//
+//        //LOGIN USERNAME AND PASSWORD DETAILS
+//        UsernameEntity username = new UsernameEntity();
+//        username.setUsername(accountDetails.getUsername());
+//        username.setPassword(accountDetails.getUsername());
+//        userRepo.save(username);
+//
+//        return "Account added = " + accountDetails.getAccountNumber() + ", with balance of = " + accountDetails.getBalance();
+//    }

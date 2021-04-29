@@ -42,4 +42,13 @@
             <column name="job_title" type="text"/>
         </createTable>
     </changeSet>
+    <changeSet id="29.04.2021 username and password" author="Marek Siinvert">
+        <createTable tableName="users">
+            <column name ="username" type="text">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name ="password" type="text"></column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
