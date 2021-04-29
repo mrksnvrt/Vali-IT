@@ -1,9 +1,6 @@
 package ee.bcs.valiit.bank.bankController;
 
-import ee.bcs.valiit.bank.bankDto.AccountEntity;
-import ee.bcs.valiit.bank.bankDto.CreateTransferMoney;
-import ee.bcs.valiit.bank.bankDto.AccoundCommand;
-import ee.bcs.valiit.bank.bankDto.CreateAccount;
+import ee.bcs.valiit.bank.bankDto.*;
 import ee.bcs.valiit.bank.bankService.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,8 +43,20 @@ public class BankController {
     @CrossOrigin
     @GetMapping("allAccounts")
     public List<AccountEntity> allAccounts() {
+
         return bankService.allAccounts();
     }
+
+    //GET ALL TRANSACTIONS
+    //http://localhost:8080/allTransactions
+    @CrossOrigin
+    @GetMapping("allTransactions")
+    public List<TransferEntity> allTransactions() {
+        return bankService.allTransactions();
+    }
+
+
+
 
     //INSERT MONEY TO BANK ACCOUNT
     //http://localhost:8080/bank/deposit

@@ -43,10 +43,14 @@ public class BankService {
         }
     }
 
-    //SHOW FULL BALANCE
-
+    //SHOW ALL ACCOUNTS
     public List<AccountEntity> allAccounts() {
         return accountRepo.findAll();
+    }
+
+    //SHOW ALL TRANSACTION HISTORY
+    public List<TransferEntity> allTransactions() {
+        return transActionRepo.findAll();
     }
 
     //DEPOSIT
