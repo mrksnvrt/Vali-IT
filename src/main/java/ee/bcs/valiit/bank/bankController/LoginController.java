@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     @Autowired
     private LoginService loginService;
-    //http://localhost:8080/login
-    @PostMapping("login")
+    //http://localhost:8080/bank/login
+    @PostMapping("bank/login")
     public String sampleLogin(@RequestBody LoginRequest loginRequest){
         return loginService.logIn(loginRequest);
     }

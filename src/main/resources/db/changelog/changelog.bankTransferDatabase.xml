@@ -4,18 +4,17 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="22.04.2021 add employee" author="Marek Siinvert">
-        <!-- <column name="id" type="int" autoIncrement="true">-->
-        <createTable tableName="employee">
+    <changeSet id="21.04.2021 BANK TRANSFER DATABASE" author="Marek Siinvert">
+        <createTable tableName="transaction_history">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="first_name" type="text"/>
-            <column name="last_name" type="text"/>
-            <column name="birth_year" type="numeric"/>
-            <column name="job_title" type="text"/>
+            <column name="from_account" type="text"/>
+            <column name="to_account" type="text"/>
+            <column name="date_time" type="timestamp"/>
+            <column name="transfer_amount" type="numeric"/>
+            <column name="transfer_type" type="text"/>
         </createTable>
     </changeSet>
-
 
 </databaseChangeLog>

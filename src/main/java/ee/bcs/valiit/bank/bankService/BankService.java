@@ -1,5 +1,4 @@
 package ee.bcs.valiit.bank.bankService;
-
 import ee.bcs.valiit.bank.bankDto.CreateAccount;
 import ee.bcs.valiit.bank.bankDto.AccountEntity;
 import ee.bcs.valiit.bank.bankDto.TransferEntity;

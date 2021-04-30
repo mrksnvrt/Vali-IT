@@ -6,17 +6,20 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 @Service
 public class LoginService {
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public String logIn(LoginRequest loginRequest) {
         String password = userRepo.getOne(loginRequest.getUsername()).getPassword();
 
-        if (loginRequest.getPassword().equals(password)) {
+        if (passwordEncoder.matches(loginRequest.getPassword(),password)) {
             Date tokenExpirationDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24);
             JwtBuilder jwtBuilder = Jwts.builder()
                     .setExpiration(tokenExpirationDate)

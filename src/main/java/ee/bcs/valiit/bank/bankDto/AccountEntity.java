@@ -4,6 +4,7 @@ package ee.bcs.valiit.bank.bankDto;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Table(name = "account")
 @Entity
@@ -17,7 +18,7 @@ public class AccountEntity {
         private boolean block;
         private String firstName;
         private String lastName;
-        private String pin;
+        private LocalDateTime dateTime;
 
         public String getAccountNumber() {
                 return accountNumber;
@@ -59,11 +60,11 @@ public class AccountEntity {
                 this.lastName = lastName;
         }
 
-        public String getPin() {
-                return pin;
+        public LocalDateTime getDateTime() {
+                return dateTime;
         }
 
-        public void setPin(String pin) {
-                this.pin = pin;
+        public void setDateTime(LocalDateTime dateTime) {
+                this.dateTime = dateTime;
         }
 }

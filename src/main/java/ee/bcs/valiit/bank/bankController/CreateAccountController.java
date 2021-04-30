@@ -15,12 +15,12 @@ public class CreateAccountController {
     CreateAccountService createAccountService;
 
     //CREATE ACCOUNT
-    //http://localhost:8080/createAccount
+    //http://localhost:8080/bank/createAccount
     @CrossOrigin
-    @PostMapping("createAccount")
-    public void createAccount(@RequestBody CreateAccount accountDetails) {
+    @PostMapping("bank/createAccount")
+    public String createAccount(@RequestBody CreateAccount accountDetails) {
 
-        createAccountService.createAccount(accountDetails);
+        return createAccountService.createAccount(accountDetails);
     }
 
 }
