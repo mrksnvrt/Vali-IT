@@ -49,9 +49,6 @@ public class BankController {
         return bankService.allTransactions();
     }
 
-
-
-
     //INSERT MONEY TO BANK ACCOUNT
     //http://localhost:8080/bank/deposit
     @CrossOrigin

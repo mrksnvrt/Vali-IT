@@ -9,5 +9,6 @@
     <include file="/db/changelog/changelog.bankAccountDatabase.xml"/>
     <include file="/db/changelog/changelog.bankTransferDatabase.xml"/>
     <include file="/db/changelog/changelog.bankUsersDatabase.xml"/>
+    <include file="/db/changelog/changelog.weather.xml"/>
 
 </databaseChangeLog>
